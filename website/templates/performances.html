@@ -15,6 +15,9 @@
         <th><a href="#"></a></th> 
         {% if performances|length > 0 %}
             {% for key in performances[0].keys() %}
+        <th><a href="#"></a></th>
+        <th><a href="#"></a></th>
+        {% for key in performances[0].keys() %}
 
             <!-- Create a <th> tag with the key inside of it, this will be
             our header row -->
@@ -32,6 +35,8 @@
     <tr>
         <td><a href="edit_performance/{{person.performance_id}}">Edit</a></td> 
         <td><a href="delete_performance/{{person.performance_id}}">Delete</a></td> 
+        <td><a href="/edit_performance/{{ person.performance_id }} ">Edit</a></td> <!-- TODO -->
+        <td><a href="/delete_performance/{{ person.performance_id }} ">Delete</a></td> <!-- TODO -->
         <!-- Then iterate through every key in the current person dictionary -->
         {% for key in person.keys() %}
         <!-- Create a <td> element with the value of that key in it -->
@@ -57,6 +62,32 @@
         <div class="form-group">
             <label for="actor_id">Street Name</label>
             <input type="number" class="form-control" id="actor_id" name="actor_id" placeholder="Enter actor id">
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br />
+        <br />
+    </form>
+</div>
+
+{% endblock %}
+
+{% block form %}
+
+
+<!-- Form -->
+<!-- Maybe add a default value attribute -->
+<div id="container">
+    <form method="POST" id="New_Item">
+        <br />
+        <p><strong>Add Performance</strong></p>
+        <div class="form-group">
+            <label for="movie_id"> Movie Id </label>
+            <input type="number" class="form-control" id="movie_id" name="movie_id" min="0" placeholder="Enter Movie Id">
+        </div>
+        <div class="form-group">
+            <label for="actor_id"> Actor Id </label>
+            <input type="number" class="form-control" id="actor_id" name="actor_id" step="0.01" placeholder="Enter Actor Id">
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Submit</button>

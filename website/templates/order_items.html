@@ -14,6 +14,12 @@
       <th><a href="#"></a></th> 
       <th><a href="#"></a></th> 
       {% if order_items|length > 0 %}
+    <thead>
+    <tr>
+        <!-- Iterate through each key in the first entry to get the
+        column name -->
+        <th><a href="#"></a></th>
+        <th><a href="#"></a></th>
         {% for key in order_items[0].keys() %}
 
         <!-- Create a <th> tag with the key inside of it, this will be
@@ -44,6 +50,23 @@
 
 
 {% block form %}
+    </tr>
+    <tbody>
+
+    <!-- Now, iterate through every person in bsg_people -->
+    {% for person in order_items %}
+    <tr>
+        <td><a href="/edit_order_item/{{person.order_id}}{{person.movie_id}}">Edit</a></td> <!-- TODO -->
+        <td><a href="/edit_order_item/{{person.order_id}}{{person.movie_id}}">Delete</a></td> <!-- TODO -->
+        <!-- Then iterate through every key in the current person dictionary -->
+        {% for key in person.keys() %}
+        <!-- Create a <td> element with the value of that key in it -->
+        <td>{{person[key]}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
+    <br />
 
 <!-- Form -->
 <div id="container">
@@ -71,6 +94,36 @@
         <div class="form-group">
             <label for="quantity">Enter quantity</label>
             <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br />
+        <br />
+    </form>
+</div>
+
+{% endblock %}
+
+{% block form %}
+
+
+<!-- Form -->
+<!-- Maybe add a default value attribute -->
+<div id="container">
+    <form method="POST" id="New_Item">
+        <br />
+        <p><strong>Add Performance</strong></p>
+        <div class="form-group">
+            <label for="order_id"> Order Id </label>
+            <input type="number" class="form-control" id="order_id" name="order_id" min="0" placeholder="Enter Order Id">
+        </div>
+        <div class="form-group">
+            <label for="movie_id"> Actor Id </label>
+            <input type="number" class="form-control" id="movie_id" name="movie_id" step="0.01" placeholder="Enter Movie Id">
+        </div>
+        <div class="form-group">
+            <label for="quantity">  Quantity </label>
+            <input type="number" class="form-control" id="quantity" name="quantity" step="0.01" placeholder="Enter Quantity">
+        </div>
         <br />
         <button type="submit" class="btn btn-primary">Submit</button>
         <br />
