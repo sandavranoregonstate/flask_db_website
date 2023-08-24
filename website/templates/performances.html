@@ -11,22 +11,30 @@
     <tr>
         <!-- Iterate through each key in the first entry to get the
         column name -->
+        <th><a href="#"></a></th> 
+        <th><a href="#"></a></th> 
+        {% if performances|length > 0 %}
+            {% for key in performances[0].keys() %}
         <th><a href="#"></a></th>
         <th><a href="#"></a></th>
         {% for key in performances[0].keys() %}
 
-        <!-- Create a <th> tag with the key inside of it, this will be
-        our header row -->
-        <th>{{ key }}</th>
+            <!-- Create a <th> tag with the key inside of it, this will be
+            our header row -->
+            <th>{{ key }}</th>
 
-        <!-- End of this for loop -->
-        {% endfor %}
+            <!-- End of this for loop -->
+            {% endfor %}
+        {% endif %}
+
     </tr>
     <tbody>
 
-    <!-- Now, iterate through every person in bsg_people -->
+    <!-- Now, iterate through every row -->
     {% for person in performances %}
     <tr>
+        <td><a href="edit_performance/{{person.performance_id}}">Edit</a></td> 
+        <td><a href="delete_performance/{{person.performance_id}}">Delete</a></td> 
         <td><a href="/edit_performance/{{ person.performance_id }} ">Edit</a></td> <!-- TODO -->
         <td><a href="/delete_performance/{{ person.performance_id }} ">Delete</a></td> <!-- TODO -->
         <!-- Then iterate through every key in the current person dictionary -->
@@ -36,8 +44,31 @@
         {% endfor %}
     </tr>
     {% endfor %}
-    </table>
-    <br />
+</table>
+<br />
+{% endblock %}
+
+{% block form %}
+
+<!-- Form -->
+<div id="container">
+    <form method="POST" id="New_Person">
+        <br />
+        <p><strong>Add Performances</strong></p>
+        <div class="form-group">
+            <label for="movie_id">Movie ID</label>
+            <input type="number" class="form-control" id="movie_id" name="movie_id" placeholder="Enter movie id">
+        </div>
+        <div class="form-group">
+            <label for="actor_id">Street Name</label>
+            <input type="number" class="form-control" id="actor_id" name="actor_id" placeholder="Enter actor id">
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br />
+        <br />
+    </form>
+</div>
 
 {% endblock %}
 

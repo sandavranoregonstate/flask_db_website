@@ -7,6 +7,13 @@
 <p><strong>Order Items</strong></p>
 
 <table border="1" cellpadding="5"></tableborder>
+  <thead>
+  <tr>
+      <!-- Iterate through each key in the first entry to get the
+      column name -->
+      <th><a href="#"></a></th> 
+      <th><a href="#"></a></th> 
+      {% if order_items|length > 0 %}
     <thead>
     <tr>
         <!-- Iterate through each key in the first entry to get the
@@ -21,6 +28,28 @@
 
         <!-- End of this for loop -->
         {% endfor %}
+      {% endif %}
+  </tr>
+  <tbody>
+
+  <!-- Now, iterate through every person in bsg_people -->
+  {% for item in order_items %} 
+  <tr>
+    <td><a href="edit_order_items/{{item.order_id}}/{{item.movie_id}}">Edit</a></td> 
+    <td><a href="delete_order_item/{{item.order_id}}/{{item.movie_id}}">Delete</a></td> 
+      <!-- Then iterate through every key in the current person dictionary -->
+      {% for key in item.keys() %}
+      <!-- Create a <td> element with the value of that key in it -->
+      <td>{{item[key]}}</td>
+      {% endfor %}
+  </tr>
+  {% endfor %}
+  </table>
+  <br />
+{% endblock %}
+
+
+{% block form %}
     </tr>
     <tbody>
 
@@ -39,6 +68,38 @@
     </table>
     <br />
 
+<!-- Form -->
+<div id="container">
+    <form method="POST" id="new_order">
+        <br />
+        <p><strong>Add Order Item</strong></p>
+        <div class="form-group">
+          <label for="order_selection">Select Order ID</label>
+          <select name="order_selection" form="new_order">
+            {% for item in dropdown_order %}
+              <option value="{{item['order_id']}}">{{item['order_id']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="movie_selection">Select Movie</label>
+          <select name="movie_selection" form="new_order">
+            {% for item in dropdown_movie %}
+              <option value="{{item['movie_id']}}"">{{item['title']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="quantity">Enter quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br />
+        <br />
+    </form>
+</div>
 
 {% endblock %}
 

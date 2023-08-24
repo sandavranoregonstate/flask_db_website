@@ -48,7 +48,8 @@ reset_query = [
 	credit_card_num VARCHAR(16) NOT NULL,
 	order_fulfilled BOOL NOT NULL DEFAULT 0,
 	PRIMARY KEY (order_id),
-	FOREIGN KEY (customer_id) REFERENCES Customers(id),
+	FOREIGN KEY (customer_id) REFERENCES Customers(id)
+    ON DELETE CASCADE,
 	FOREIGN KEY (employee_id) REFERENCES Employees(id)
 	ON DELETE CASCADE 
 	-- TEMPORARY CASCADE --

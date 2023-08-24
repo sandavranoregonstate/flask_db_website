@@ -18,9 +18,9 @@ def movies():
         # validate -- refactor maybe
         if len(title) < 2:
             script.flashMessage('Title', 1, 'error')
-        elif len(stock) < 2:
+        elif len(stock) < 1:
             script.flashMessage('Stock', 1, 'error')
-        elif len(price) < 2:
+        elif len(price) < 1:
             script.flashMessage('Price', 1, 'error')
         else:
             # add to db

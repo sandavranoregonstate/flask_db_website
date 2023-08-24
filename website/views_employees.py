@@ -92,3 +92,25 @@ def edit_employee_id(id):
     result = cursor.fetchall()
     # a potential query2 that populates the dropdown etc.
     return render_template("edit/edit_employee.html", employees=result)
+
+
+@views_employees.route('/employees_search', methods=["POST", "GET"])
+def employees_search():
+    if request.method == "POST":
+        # grab input
+        qname = request.form["qname"]
+        qname = '%%' + qname + '%%'
+        # search db
+        query = "SELECT * FROM Employees WHERE first LIKE %s OR last LIKE %s;"
+        query_params=(qname, qname)
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=query_params)
+        result = cursor.fetchall()
+        # a potential query2 that populates the dropdown etc.
+        return render_template("employees_search.html", employees=result)
+    else: 
+        # Default to GET behavior and update table if entry added
+        query = "SELECT * FROM Employees;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        result = cursor.fetchall()
+        # a potential query2 that populates the dropdown etc.
+        return render_template("employees_search.html", employees=result)
