@@ -11,7 +11,8 @@
 # db = 'bsg'
 
 # For OSU Flip Servers
-host = 'classmysql.engr.oregonstate.edu'
-user = 'cs340_parky8'
-passwd = '2188' 
-db = 'cs340_parky8'
+host = 'db-mysql-sfo2-24727-do-user-14533055-0.b.db.ondigitalocean.com'
+user = 'doadmin'
+passwd = 'AVNS_3S70tl1Y8RrE66EBbBR' 
+db = 'defaultdb'
+port =25060

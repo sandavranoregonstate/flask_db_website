@@ -18,7 +18,7 @@ def connect_to_database(host = cred.host, user = cred.user, passwd = cred.passwd
     '''
     connects to a database and returns a database objects
     '''
-    db_connection = MySQLdb.connect(host,user,passwd,db)
+    db_connection = MySQLdb.connect(host,user,passwd,db , port = 25060)
     return db_connection
 
 def execute_query(db_connection = None, query = None, query_params = ()):
