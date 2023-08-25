@@ -1,3 +1,4 @@
 Flask
 Flask-MySQLdb
 mysqlclient
+gunicorn==20.1.0  # or whatever the latest version is
